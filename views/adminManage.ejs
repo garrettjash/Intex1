@@ -1,0 +1,135 @@
+<!-- Garrett Ashcroft, Zach Tullis, Zack Olsen, Jake McGuire
+Section 2 Group 5
+INTEX Fall 2023 Website
+This website is about social media and mental health. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Account Management</title>
+    <link rel="icon" type="image/x-icon" href="/ProvoFavIcon.png" />
+    
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/styles.css" rel="stylesheet" />
+    <script>
+      function confirmDelete() {
+          return confirm("Are you sure you want to delete this account?");
+      }
+  </script>
+</head>
+<style>
+  /* Add some basic styling for demonstration purposes */
+  body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: rgba(0, 0, 0, 0.85);
+  }
+
+  body {
+      padding-top: 56px; /* Adjust the value based on your navbar height */
+  }
+
+  label {
+      text-decoration-color: rgba(0, 0, 0, 0.85);
+  }
+
+  tbody tr:nth-child(even) {
+      background-color: #d0d0d0; /* Slightly darker background color for even rows */
+  }
+
+  tbody tr:nth-child(odd) {
+      background-color: #e0e0e0; /* Slightly darker background color for odd rows */
+  }
+
+  td, th {
+      text-align: center;
+      border: 1px solid #ddd; /* Add border to all cells */
+      padding: 8px; /* Add padding for better spacing */
+      font-family: Arial, sans-serif;
+  }
+
+  th {
+      font-weight: bold;
+      background-color: #333; /* Darker gray background for header cells */
+      color: white; /* White text for header cells */
+  }
+
+  /* Style the first row differently to emphasize it's the header row */
+  thead tr {
+      background-color: #666; /* Darker gray background for thead row */
+      font-family: Arial, sans-serif;
+  }
+</style>
+
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container px-4 px-lg-5">
+            <ul class="navbar-nav ms-auto">
+                <!-- <li class="nav-item"><a class="nav-link text-white" href="/" id="homeView" name="homeView"">Home</a></li> -->
+                <li class="nav-item"><a class="nav-link text-white" href="/admin" id="adminView" name="adminView">Admin</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="/createUser" id="createUserView" name="createUserView">Create Account</a></li>
+                <!-- <li class="nav-item"><a class="nav-link text-white" href="/editUser" id="manageUserView" name="manageUserView">Account Management</a></li> -->
+                <li class="nav-item"><a class="nav-link text-white" href="/report" id="reportView" name="reportView">Report</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="/adminManage" id="adminManageUserView" name="adminManageUserView">Account Management</a></li>
+                <!-- <li class="nav-item"><a class="nav-link text-white" href="/socialmedia" id="surveyView" name="surveyView">Survey</a></li> -->
+                <!-- <li class="nav-item"><a class="nav-link text-white" href="/insights" id="insightView" name="insightView">Insights</a></li> -->
+                <!-- <li class="nav-item"><a class="nav-link text-white" href="/login" id="loginView" name="loginView">Login</a></li> -->
+                <li class="nav-item"><a class="nav-link text-white" href="/" id="logoutView" name="logoutView">Logout</a></li>
+            </ul>
+    </div>
+</nav>
+   <h1 class="fst-italic lh-1 mb-4 text-white">&nbsp;&nbsp;Account Management</h1>
+   <br><br>
+   <table style="width: 100%; background-color: antiquewhite; border: 1px solid black;">
+     <thead style="background-color: rgba(0, 0, 0, 0.85);">
+       <tr>
+         <th style="text-align: left;">First Name</th>
+         <th style="text-align: left;">Last Name</th>
+         <th style="text-align: left;">Email</th>
+         <th style="text-align: left;">Username</th>
+         <th style="text-align: left;">Edit</th>
+         <th style="text-align: left;">Delete</th>
+       </tr>
+     </thead>
+     <tbody style="font-family: Arial; font-size: 9pt;">
+        <% for (let iCount = 0; iCount < users.length; iCount++) { %>
+          <tr>
+              <td><%= users[iCount].first_name %></td>
+              <td><%= users[iCount].last_name %></td>
+              <td><%= users[iCount].email %></td>
+              <td><%= users[iCount].username %></td>
+              <td style="text-align: center;">
+                <a class="btn btn-primary" href="/adminEdit/<%= users[iCount].admin_id %>">Edit</a>
+              </td>
+              <td style="text-align: center;">
+                  <form action="/adminDelete/<%= users[iCount].admin_id %>" method="POST" onsubmit="return confirmDelete();">
+                      <button class="btn btn-primary" type="submit" >Delete</button>
+                  </form>
+              </td>
+          </tr>
+        <% } %>
+
+     </tbody>
+   </table>
+   <br><br>
+   <form action="/createUser" method="GET">
+    &nbsp;&nbsp;&nbsp;<button class="btn btn-primary" type="submit">Create User</button>
+   </form>
+   <!-- Bootstrap core JS-->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+   <!-- Core theme JS-->
+   <script src="/scripts.js"></script>
+   <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+</html>

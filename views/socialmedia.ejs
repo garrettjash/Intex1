@@ -1,0 +1,437 @@
+<!-- Garrett Ashcroft, Zach Tullis, Zack Olsen, Jake McGuire
+Section 2 Group 5
+INTEX Fall 2023 Website
+This website is about social media and mental health. This page holds the survey for Provo citizens to fill out and it uploads their data into the database as well as updates the dashboard. -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Mental Health Survey</title>
+        <link rel="icon" type="image/x-icon" href="/ProvoFavIcon.png" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
+        <link href="/styles.css" rel="stylesheet" />
+    </head>
+    <!--CSS to make the website look nicer and match the css of the rest of the website-->
+    <style>
+        .error {
+        border: 1px solid red;
+        background-color: #f9f9f9;
+        }
+
+        table {
+        border-collapse: separate;
+        border-spacing: 10px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        header {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column; /* Updated to display vertically */
+            gap: 10px; /* Added gap for better spacing */
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .section-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+        }
+
+        section {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .colors-section {
+        width: 60%; /* Adjust the width as needed */
+        margin: 0 auto; /* Set the left and right margins to 'auto' */
+        padding: 20px;
+        /* background-color: rgba(0, 0, 0, 0.85); */
+        color: white;
+        }
+
+
+        .colors-list {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .color-option {
+            margin-bottom: 5px;
+        }
+
+        .add-button {
+            margin-top: 10px;
+        }
+
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .radio-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+<body>
+    <!--Navigation Bar: This allows everyday citizens to access the pages that they have access to-->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container px-4 px-lg-5">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white" href="/" id="homeView" name="homeView">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/socialmedia" id="surveyView" name="surveyView">Survey</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/insights" id="insightView" name="insightView">Insights</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/login" id="loginView" name="loginView">Login</a></li>
+                </ul>
+        </div>
+    </nav>
+    <!--Survey Title-->
+    <header>
+        <br><br><br><br>
+        <h1>Provo Social Media Impact Survey</h1>
+    </header>
+<style>
+    /* Styling the Form (Color, Padding, Shadow) */
+    form {
+        background-color: #fff;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 30px 50px;
+        box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Styling form-control Class */
+    .form-control {
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    /* Styling form-control Label */ 
+    .form-control label {
+        /* display: block; */
+        margin-bottom: 10px;
+    }
+
+    /* Styling form-control input, 
+    select, textarea */
+    .form-control input,
+    .form-control select,
+    .form-control textarea {
+        border: 1px solid #777;
+        border-radius: 2px;
+        font-family: inherit;
+        padding: 10px;
+        display: block;
+        width: 95%;
+    }
+
+    /* Styling form-control Radio 
+    button and Checkbox */
+    .form-control input[type="radio"],
+    .form-control input[type="checkbox"] {
+        display: inline-block;
+        width: auto;
+    }
+
+    /* Styling Button */
+    button {
+        background-color: #05c46b;
+        border: 1px solid #777;
+        border-radius: 2px;
+        font-family: inherit;
+        font-size: 21px;
+        display: block;
+        width: 100%;
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<form action="/socialmedia" method="post" onsubmit="alert('Survey Submitted Successfully!')">
+
+    <!-- Details -->
+    <div class="form-control">
+        <input type="hidden" name="location" id='location' value="2">
+        <input type="hidden" name="timestamp" id="timestamp" value="">
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br>
+
+    </div>
+
+    <div class="form-control">
+                <label>Gender:</label><br>
+                <input type="radio" id="male" name="gender" value="Male" required>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="Female" required>
+                <label for="female">Female</label>
+                <input type="radio" id="other" name="gender" value="Other" required>
+                <label for="other">Other</label><br>
+
+    </div>
+
+    <div class="form-control">
+        <label for="relationship-status">Relationship status:</label>
+        <select id="relationship-status" name="rel_id" required>
+        <option value="1">Single</option>
+        <option value="2">In a relationship</option>
+        <option value="3">Married</option>
+        <option value="4">Divorced</option>
+        </select><br>
+    </div>
+
+    <div class="form-control">
+        <label for="occupation-status">Occupation status:</label>
+        <select id="occupation-status" name="occ_id" required>
+        <option value="1">University Student</option>
+        <option value="2">School Student</option>
+        <option value="3">Salaried Worker</option>
+        <option value="4">Retired</option>
+        </select><br>
+    </div>
+
+    <div class="form-control">
+        <label>What type of organizations are you affiliated with?</label><br>
+        <input type="checkbox" id="Company" name="org_id[]" value="1" >
+        <label for="Company">Company</label><br>
+        <input type="checkbox" id="Government" name="org_id[]" value="2" >
+        <label for="Government">Government</label><br>
+        <input type="checkbox" id="Private" name="org_id[]" value="3" >
+        <label for="Private">Private</label><br>
+        <input type="checkbox" id="School" name="org_id[]" value="4" >
+        <label for="School">School</label><br>
+        <input type="checkbox" id="University" name="org_id[]" value="5" >
+        <label for="University">University</label><br>
+    </div>
+
+    <div class="form-control">
+        <label>Do you use social media?</label><br>
+        <input type="radio" id="yes" name="use_social" value="Yes" required>
+        <label for="yes">Yes</label>
+        <input type="radio" id="no" name="use_social" value="No" required>
+        <label for="no">No</label><br>
+    </div>
+
+    <div class="form-control">
+        <label>What social media platforms do you commonly use? (Check all that apply)</label><br>
+        <input type="checkbox" id="facebook" name="platform_id[]" value="1" >
+        <label for="facebook">Facebook</label><br>
+        <input type="checkbox" id="twitter" name="platform_id[]" value="2" >
+        <label for="twitter">Twitter</label><br>
+        <input type="checkbox" id="instagram" name="platform_id[]" value="3" >
+        <label for="instagram">Instagram</label><br>
+        <input type="checkbox" id="youtube" name="platform_id[]" value="4" >
+        <label for="youtube">YouTube</label><br>
+        <input type="checkbox" id="discord" name="platform_id[]" value="5" >
+        <label for="discord">Discord</label><br>
+        <input type="checkbox" id="reddit" name="platform_id[]" value="6" >
+        <label for="reddit">Reddit</label><br>
+        <input type="checkbox" id="pinterest" name="platform_id[]" value="7" >
+        <label for="pinterest">Pinterest</label><br>
+        <input type="checkbox" id="tiktok" name="platform_id[]" value="8" >
+        <label for="tiktok">TikTok</label><br>
+        <input type="checkbox" id="snapchat" name="platform_id[]" value="9" >
+        <label for="snapchat">Snapchat</label><br>
+    </div>
+
+    <div class="form-control">
+        <label for="time-spent">What is the average time you spend on social media every day?</label>
+        <select id="time-spent" name="time_id" required>
+        <option value="1">Less than an Hour</option>
+        <option value="2">Between 1 and 2 hours</option>
+        <option value="3">Between 2 and 3 hours</option>
+        <option value="4">Between 3 and 4 hours</option>
+        <option value="5">Between 4 and 5 hours</option>
+        <option value="6">More than 5 hours</option>
+        </select><br>
+    </div>
+ 
+    <div class="form-control">
+        How often do you find yourself using social media without a specific purpose?
+        <select id="no_purpose" name="no_purpose" required>
+        <option name="no_purpose" value="1" >Never</option>
+        <option name="no_purpose" value="2" >Rarely</option>
+        <option name="no_purpose" value="3" >Sometimes</option>
+        <option name="no_purpose" value="4" >Often</option>
+        <option name="no_purpose" value="5" >Always</option>
+        </select><br>
+    </div>
+
+    <div class="form-control">
+        How often do you get distracted by social media when you are busy doing something?
+        <select id="distracted_busy" name="distracted_busy" required>
+        <option name="distracted_busy" value="1" >Never</option>
+        <option name="distracted_busy" value="2" >Rarely</option>
+        <option name="distracted_busy" value="3" >Sometimes</option>
+        <option name="distracted_busy" value="4" >Often</option>
+        <option name="distracted_busy" value="5" >Always</option>
+        </select><br>
+    </div>
+
+    <div class="form-control">
+        Do you feel restless if you haven't used social media in a while?
+        <select id="restless" name="restless" required>
+        <option name="restless" value="1" >Never</option>
+        <option name="restless" value="2" >Rarely</option>
+        <option name="restless" value="3" >Sometimes</option>
+        <option name="restless" value="4" >Often</option>
+        <option name="restless" value="5" >Always</option>
+        </select><br>
+    </div>
+
+    <div class="form-control">
+        How often do you find yourself distracted?
+        <select id="distracted_general" name="distracted_general" required>
+        <option name="distracted_general" value="1" >Never</option>
+        <option name="distracted_general" value="2" >Rarely</option>
+        <option name="distracted_general" value="3" >Sometimes</option>
+        <option name="distracted_general" value="4" >Often</option>
+        <option name="distracted_general" value="5" >Always</option>
+        </select><br>
+    </div>
+
+    <div class="form-control">
+        How much are you bothered by worries?
+        <select id="bothered_worried" name="bothered_worried" required>
+        <option name="bothered_worried" value="1" >Never</option>
+        <option name="bothered_worried" value="2" >Rarely</option>
+        <option name="bothered_worried" value="3" >Sometimes</option>
+        <option name="bothered_worried" value="4" >Often</option>
+        <option name="bothered_worried" value="5" >Always</option>
+        </select><br>
+    </div>
+
+    <div class="form-control">
+        Do you find it difficult to concentrate on things?
+        <select id="difficult_concentrate" name="difficult_concentrate" required>
+        <option name="difficult_concentrate" value="1" >Never</option>
+        <option name="difficult_concentrate" value="2" >Rarely</option>
+        <option name="difficult_concentrate" value="3" >Sometimes</option>
+        <option name="difficult_concentrate" value="4" >Often</option>
+        <option name="difficult_concentrate" value="5" >Always</option>
+        </select><br>
+    </div>
+
+    <div class="form-control">
+        How often do you compare yourself to other successful people through the use of social media?
+        <select id="compare_people" name="compare_people" required>
+        <option name="compare_people" value="1" >Never</option>
+        <option name="compare_people" value="2" >Rarely</option>
+        <option name="compare_people" value="3" >Sometimes</option>
+        <option name="compare_people" value="4" >Often</option>
+        <option name="compare_people" value="5" >Always</option>
+        </select><br>
+    </div>
+
+    <div class="form-control">
+        Based on the previous question, do you feel good about the comparison?
+        <select id="feeling_comparison" name="feeling_comparison" required>
+        <option name="feeling_comparison" value="1" >Never</option>
+        <option name="feeling_comparison" value="2" >Rarely</option>
+        <option name="feeling_comparison" value="3" >Sometimes</option>
+        <option name="feeling_comparison" value="4" >Often</option>
+        <option name="feeling_comparison" value="5" >Always</option>
+        </select><br>
+    </div>
+
+    <div class="form-control">
+        How often do you look to seek validation from features of social media?
+        <select id="validation_social" name="validation_social" required>
+        <option name="validation_social" value="1" >Never</option>
+        <option name="validation_social" value="2" >Rarely</option>
+        <option name="validation_social" value="3" >Sometimes</option>
+        <option name="validation_social" value="4" >Often</option>
+        <option name="validation_social" value="5" >Always</option>
+        </select><br>
+    </div>
+
+    <div class="form-control">
+        How often do you feel depressed or down?
+        <select id="depressed_down" name="depressed_down" required>
+        <option name="depressed_down" value="1" >Never</option>
+        <option name="depressed_down" value="2" >Rarely</option>
+        <option name="depressed_down" value="3" >Sometimes</option>
+        <option name="depressed_down" value="4" >Often</option>
+        <option name="depressed_down" value="5" >Always</option>
+        </select><br>
+    </div>
+
+    <div class="form-control">
+        How often does your interest in daily activities fluctuate?
+        <select id="fluctuate_activities" name="fluctuate_activities" required>
+        <option name="fluctuate_activities" value="1" >Never</option>
+        <option name="fluctuate_activities" value="2" >Rarely</option>
+        <option name="fluctuate_activities" value="3" >Sometimes</option>
+        <option name="fluctuate_activities" value="4" >Often</option>
+        <option name="fluctuate_activities" value="5" >Always</option>
+        </select><br>
+    </div>
+
+    <div class="form-control">
+        How often do you face issues regarding sleep?
+        <select id="sleep_issues" name="sleep_issues" required>
+        <option name="sleep_issues" value="1" >Never</option>
+        <option name="sleep_issues" value="2" >Rarely</option>
+        <option name="sleep_issues" value="3" >Sometimes</option>
+        <option name="sleep_issues" value="4" >Often</option>
+        <option name="sleep_issues" value="5" >Always</option>
+        </select><br>
+    </div>
+
+    <button type="submit" class="btn btn-primary" value="submit">Submit</button>
+</form>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!-- Garrett Ashcroft, Zach Tullis, Zack Olsen, Jake McGuire
+Section 2 Group 5
+INTEX Fall 2023 Website
+This website is about social media and mental health. This page lets the logged in users see what options they have access to-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>User Portal</title>
+        <link rel="icon" type="image/x-icon" href="/ProvoFavIcon.png" />
+        <!-- Font Awesome icons-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation Bar: Links to all pages allowed for logged in users-->
+        <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link text-white" href="/userLanding/<%= adminId %>" id="userLandingView" name="userLandingView">User Portal</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/editUser/<%= adminId %>" id="manageUserView" name="manageUserView">Account Management</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/userReport/<%= adminId %>" id="userReportView" name="userReportView">Report</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/" id="logoutView" name="logoutView">Logout</a></li>
+                    </ul>
+            </div>
+        </nav>
+        <!-- Background Video-->
+        <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><source src="/mp4/Provo.mp4" type="video/mp4" /></video>
+        <!-- Masthead-->
+        <div class="masthead">
+            <div class="masthead-content text-white">
+                <div class="container-fluid px-4 px-lg-0">
+                    <!--This is the information that will be displayed on this logged in user landing page-->
+                    <h1 class="fst-italic lh-1 mb-4">User Portal</h1>
+                    <h3 class="fst-italic lh-1 mb-4">Welcome</h3><br><br>
+                    <!--This allows the user to go to the page where they can edit their account information-->
+                    <p>Edit Account Information</p>
+                    <a type="button" class="btn btn-primary" style="width:150px" href="/editUser/<%= adminId %>">Account</a><br><br><br>
+                    <!--This allows the user to go to the page where they can view the survey data-->
+                    <p>View Survey Data</p>
+                    <a type="button" class="btn btn-primary" style="width:150px" href="/userReport/<%= adminId %>">View Report</a><br><br>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="/scripts.js"></script>
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>

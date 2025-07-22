@@ -1,0 +1,105 @@
+<!-- Garrett Ashcroft, Zach Tullis, Zack Olsen, Jake McGuire
+Section 2 Group 5
+INTEX Fall 2023 Website
+This website is about social media and mental health. This page allows the user to edit their username, password, first name, last name, and password after they have logged in-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Edit User</title>
+        <link rel="icon" type="image/x-icon" href="/ProvoFavIcon.png" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
+        <link href="/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation Bar: Links to all pages allowed for logged-in users-->
+        <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link text-white" href="/userLanding/<%= adminId %>" id="userLandingView" name="userLandingView">User Portal</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/editUser/<%= adminId %>" id="manageUserView" name="manageUserView">Account Management</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/userReport/<%= adminId %>" id="userReportView" name="userReportView">Report</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/" id="logoutView" name="logoutView">Logout</a></li>
+                    </ul>
+            </div>
+        </nav>
+        <!-- Background Video of Provo-->
+        <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><source src="/mp4/Provo.mp4" type="video/mp4" /></video>
+        <!-- Masthead-->
+        <div class="masthead">
+            <div class="masthead-content text-white">
+                <div class="container-fluid px-4 px-lg-0">
+                    <!--This is the header and the form that appears on this page when it loads. -->
+                    <h1 class="fst-italic lh-1 mb-4">Account Information</h1>
+                    <!--When submitted, this form passes the adminId of the user to a parameter and routes the user to the editUser app.post route-->
+                    <form action="/editUser/<%= adminId %>" method="POST">
+                        <!--User's first name will atuto fill this value and the user can edit it.-->
+                        <div class="row input-group-newsletter" style="width: 450px">
+                            <div class="col">
+                                <label for="first_name">First Name:</label>
+                                <input type="text" class="form-control" style="width:250px" id="first_name" name="first_name" value="<%= userInfo[0].first_name %>">
+                            <br>
+                        </div>
+                        <br>
+                        <!--User's last name will atuto fill this value and the user can edit it.-->
+                        <div class="row input-group-newsletter" style="width: 450px">
+                            <div class="col">
+                                <label for="last_name">Last Name:</label>
+                                <input type="text" class="form-control" style="width:250px" id="last_name" name="last_name" value="<%= userInfo[0].last_name %>">
+                            <br>
+                        </div>
+                        <br>
+                        <!--User's email will atuto fill this value and the user can edit it.-->
+                        <div class="row input-group-newsletter" style="width: 450px">
+                            <div class="col">
+                                <label for="email">Email:</label>
+                                <input type="text" class="form-control" style="width:250px" id="email" name="email" value="<%= userInfo[0].email %>">
+                                <br>
+                        </div>
+                        <br>
+                        <!--User's username will atuto fill this value and the user can edit it.-->
+                        <div class="row input-group-newsletter" style="width: 450px">
+                            <div class="col">
+                                <label for="username">Username:</label><br>
+                                <input type="text" class="form-control" style="width:250px" id="username" name="username" value="<%= userInfo[0].username %>"><br>
+                        </div>
+                        <br>
+                        <!--User's password will atuto fill this value (with dots to not ever show personal information on the website) and the user can edit it.-->
+                        <div class="row input-group-newsletter" style="width: 450px">
+                            <div class="col">
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control" style="width:250px" id="password" name="password" value="<%= userInfo[0].password %>">
+                            <br><br>
+                        </div>
+                        <br>
+                        <!--Update account button that submits the form to update the user's information in the database-->
+                        <button type="submit" class="btn btn-primary" style="width:275px">Update Account</button>
+                        <div class="invalid-feedback mt-2" data-sb-feedback="email:required">An email is required.</div>
+                        <div class="invalid-feedback mt-2" data-sb-feedback="email:email">Email is not valid.</div>
+                        <!-- Submit success message-->
+                        <div class="d-none" id="submitSuccessMessage">
+                            <div class="text-center mb-3 mt-2">
+                                <div class="fw-bolder">Form submission successful!</div>
+                                To activate this form, sign up at
+                                <br />
+                                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                            </div>
+                        </div>
+                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Error sending message!</div></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="/scripts.js"></script>
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>

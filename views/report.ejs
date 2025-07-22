@@ -1,0 +1,192 @@
+<!-- Garrett Ashcroft, Zach Tullis, Zack Olsen, Jake McGuire
+Section 2 Group 5
+INTEX Fall 2023 Website
+This website is about social media and mental health. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Table Page</title>
+    <link rel="icon" type="image/x-icon" href="/ProvoFavIcon.png" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/styles.css" rel="stylesheet" />
+</head>
+
+    <style>
+        /* Add some basic styling for demonstration purposes */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+        }
+      
+        label {
+            text-decoration-color: rgba(0, 0, 0, 0.85);
+        }
+      
+        tbody tr:nth-child(even) {
+            background-color: #d0d0d0; /* Slightly darker background color for even rows */
+        }
+      
+        tbody tr:nth-child(odd) {
+            background-color: #e0e0e0; /* Slightly darker background color for odd rows */
+        }
+      
+        td, th {
+            text-align: center;
+            border: 1px solid #ddd; /* Add border to all cells */
+            padding: 8px; /* Add padding for better spacing */
+            font-family: Arial, sans-serif;
+        }
+      
+        th {
+            font-weight: bold;
+            background-color: #333; /* Darker gray background for header cells */
+            color: white; /* White text for header cells */
+        }
+      
+        /* Style the first row differently to emphasize it's the header row */
+        thead tr {
+            background-color: #666; /* Darker gray background for thead row */
+            font-family: Arial, sans-serif;
+        }
+      </style>
+
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg" id="mainNav">
+        <div class="container">
+
+<!-- userDetails.ejs -->
+                <label for="user_id" class="text-white">Select User ID:</label>
+                <select id="user_id" name="user_id" style="width: 125px;">
+                    <% 
+                    const uniqueUserIds = new Set();
+                    if (Array.isArray(results)) {
+                        results.forEach(user => {
+                            uniqueUserIds.add(user.user_id);
+                        });
+                    }
+                    
+                    // Iterate over unique user_ids %>
+                    <option value="">Select a user</option>
+                    <% Array.from(uniqueUserIds).forEach(user_id => {
+                    %>
+                        <option value="<%= user_id %>"><%= user_id %></option>
+                    <% }); %>
+                </select>&nbsp;&nbsp;&nbsp;
+                <a href="" id="searchUserLink" class="btn btn-primary">Search User</a>
+
+                <!-- userDetails.ejs -->
+
+                <script>
+                    // Add event listener to the dropdown
+                    document.getElementById('user_id').addEventListener('change', function() {
+                        // Get the selected user_id
+                        const selectedUserId = this.value;
+
+                        // Update the href attribute of the anchor tag
+                        const searchUserLink = document.getElementById('searchUserLink');
+                        
+                        // Set href to the default report page if no user is selected
+                        searchUserLink.href = selectedUserId ? `/userDetails/${selectedUserId}` : '/report';
+                    });
+                </script>
+
+
+                      
+                <ul class="navbar-nav ms-auto">
+                    <!-- <li class="nav-item"><a class="nav-link text-white" href="/" id="homeView" name="homeView"">Home</a></li> -->
+                    <li class="nav-item text-white"><a class="nav-link text-white" href="/admin" id="adminView" name="adminView">Admin</a></li>
+                    <li class="nav-item text-white"><a class="nav-link text-white" href="/createUser" id="createUserView" name="createUserView">Create Account</a></li>
+                    <li class="nav-item text-white"><a class="nav-link text-white" href="/report" id="reportView" name="reportView">Report</a></li>
+                    <li class="nav-item text-white"><a class="nav-link text-white" href="/adminManage" id="adminManageUserView" name="adminManageUserView">Account Management</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link text-white" href="/socialmedia" id="surveyView" name="surveyView">Survey</a></li> -->
+                    <!-- <li class="nav-item"><a class="nav-link text-white" href="/insights" id="insightView" name="insightView">Insights</a></li> -->
+                    <!-- <li class="nav-item"><a class="nav-link " href="/login" id="loginView" name="loginView">Login</a></li> -->
+                    <li class="nav-item text-white"><a class="nav-link text-white" href="/" id="logoutView" name="logoutView">Logout</a></li>
+                </ul>
+        </div>
+    </nav>
+<div>
+
+      
+
+<table>
+    <thead>
+        <tr>
+            <th>&nbsp;&nbsp;&nbsp;User&nbsp;ID&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Timestamp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Age&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Gender&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Relationship&nbsp;Status&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Occupation&nbsp;Status&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Affiliated&nbsp;Organizations&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Social&nbsp;Media&nbsp;Usage&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Platform&nbsp;Name&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Avg&nbsp;Daily&nbsp;Time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;No&nbsp;Purpose&nbsp;on&nbsp;Media&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Distracted&nbsp;By&nbsp;Media&nbsp;When&nbsp;Busy&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Restless&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Easily&nbsp;Distracted&nbsp;in&nbsp;General&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Bothered&nbsp;by&nbsp;Worries&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Difficulty&nbsp;Concentrating&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Compare&nbsp;to&nbsp;Successful&nbsp;People&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Feeling&nbsp;About&nbsp;Comparisons&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Validation&nbsp;from&nbsp;Social&nbsp;Media&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Feeling&nbsp;Depressed&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Fluctuation&nbsp;of&nbsp;Daily&nbsp;Activities&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;Sleep&nbsp;Issues&nbsp;&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;&nbsp;City&nbsp;&nbsp;&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- results.length -->
+        <% for (let iCount = 0; iCount < results.length; iCount++) { %>
+            <tr>
+                <td><%= results[iCount].user_id %></td>
+                <td><%= results[iCount].timestamp.toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }) %></td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].age %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].gender %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].rel_status %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].occ_status %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].aff_orgs %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].use_social %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].platform_name %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].avg_time %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].no_purpose %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].distracted_busy %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].restless %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].distracted_general %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].bothered_worried %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].difficult_concentrate %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].compare_people %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].feeling_comparison %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].validation_social %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].depressed_down %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].fluctuate_activities %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].sleep_issues %>&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;<%= results[iCount].location %>&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+</div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="/scripts.js"></script>
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
